@@ -92,5 +92,6 @@
             <sqltable>TwoPlan_FileSQLTable</sqltable>
             <sqlcolumn>MODIFIED</sqlcolumn>
         </attribute>
+        <store name="TwoPlan_FileStore"/>
     </definition>
 </datamodel-type>

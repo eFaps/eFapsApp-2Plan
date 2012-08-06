@@ -24,7 +24,7 @@
 -->
 <install xmlns="http://www.efaps.org/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.efaps.org/xsd http://www.efaps.org/xsd/eFaps_1.0.xsd">
-    <application>eFapsApp-POS</application>
+    <application>eFapsApp-TwoPlan</application>
     <dependencies>
         <dependency order="0">
             <groupId>org.efaps</groupId>
@@ -70,5 +70,12 @@
     </dependencies>
     <version number="1" reloadCache="false" login="true" compile="true">
         <description>Install 2-plan Integration App.</description>
+        <script type="groovy">
+            import org.efaps.esjp.admin.ui.UIUpdate;
+
+            UIUpdate update = new UIUpdate();
+            <!-- TwoPlan_Projects_ProjectTree_File, Projects_ProjectTree -->
+            update.add2Menu("5a5e8b9f-f68d-4ae7-87a2-224dac57fec7", "1336daea-b7d2-418f-accc-0edf5937f3cb", -1);
+        </script>
     </version>
 </install>
