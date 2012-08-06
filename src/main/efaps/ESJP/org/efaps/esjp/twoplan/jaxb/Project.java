@@ -31,6 +31,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import org.efaps.admin.program.esjp.EFapsRevision;
+import org.efaps.admin.program.esjp.EFapsUUID;
+
 /**
  * TODO comment!
  *
@@ -40,6 +43,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "Project")
 @XmlType(name = "org.efaps.esjp.twoplan.jaxb.Project")
+@EFapsUUID("5daed293-ec12-4559-b94e-896acfa37df1")
+@EFapsRevision("$Rev: 5526 $")
 public class Project
     extends AbstractObject
 {

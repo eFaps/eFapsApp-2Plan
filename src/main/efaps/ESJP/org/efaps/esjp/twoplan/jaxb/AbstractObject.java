@@ -25,6 +25,9 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
+import org.efaps.admin.program.esjp.EFapsRevision;
+import org.efaps.admin.program.esjp.EFapsUUID;
+
 
 /**
  * TODO comment!
@@ -33,6 +36,8 @@ import javax.xml.bind.annotation.XmlAttribute;
  * @version $Id: $
  */
 @XmlAccessorType(XmlAccessType.NONE)
+@EFapsUUID("7960c579-be7b-4dd2-bad8-1570b7973ed2")
+@EFapsRevision("$Rev: 5526 $")
 public class AbstractObject
 {
     /**

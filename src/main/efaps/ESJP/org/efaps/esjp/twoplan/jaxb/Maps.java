@@ -28,6 +28,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import org.efaps.admin.program.esjp.EFapsRevision;
+import org.efaps.admin.program.esjp.EFapsUUID;
+
 /**
  * TODO comment!
  *
@@ -36,6 +39,8 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "org.efaps.esjp.twoplan.jaxb.Maps")
+@EFapsUUID("e6e27fb7-2a9c-4071-b999-ebf93741c2e6")
+@EFapsRevision("$Rev: 5526 $")
 public class Maps
 {
     /**

@@ -26,6 +26,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
+import org.efaps.admin.program.esjp.EFapsRevision;
+import org.efaps.admin.program.esjp.EFapsUUID;
+
 
 /**
  * TODO comment!
@@ -35,6 +38,8 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "org.efaps.esjp.twoplan.jaxb.Entries")
+@EFapsUUID("d96fb02d-9c0a-468d-9cd5-9f5bab9173cf")
+@EFapsRevision("$Rev: 5526 $")
 public class Entries
 {
     /**

@@ -24,6 +24,9 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import org.efaps.admin.program.esjp.EFapsRevision;
+import org.efaps.admin.program.esjp.EFapsUUID;
+
 /**
  * TODO comment!
  *
@@ -32,6 +35,8 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "org.efaps.esjp.twoplan.jaxb.Calendar")
+@EFapsUUID("0b093754-69f0-44d9-91d8-3ab47baabf6f")
+@EFapsRevision("$Rev: 5526 $")
 public class Calendar
     extends AbstractObject
 {
