@@ -37,7 +37,7 @@ import org.efaps.admin.program.esjp.EFapsUUID;
 @EFapsUUID("6968ebf6-1380-48c0-bb80-9912ddefc784")
 @EFapsRevision("$Rev$")
 public class File
-    extends File_Abstract
+    extends File_Base
 {
 
 }

@@ -31,14 +31,14 @@
             <property name="Phrase">$&lt;attribute[Name]&gt; - $&lt;file.label&gt;</property>
             <property name="HRef">${COMMONURL}/MenuTree.jsp</property>
             <property name="Label">TwoPlan_File/Name.Label</property>
-            <property name="Width">6</property>
         </field>
         <field name="status">
             <property name="Attribute">Status</property>
-            <property name="ModeView">READONLY</property>
-            <property name="ModePrint">READONLY</property>
             <property name="Label">TwoPlan_File/Status.Label</property>
-            <property name="Width">2</property>
+        </field>
+        <field name="created">
+            <property name="Attribute">Created</property>
+            <property name="Label">TwoPlan_File/Created.Label</property>
         </field>
         <field name="checkout">
             <icon>Action_View</icon>
