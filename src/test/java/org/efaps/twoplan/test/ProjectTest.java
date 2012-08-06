@@ -25,6 +25,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.PropertyException;
 
+import org.efaps.esjp.twoplan.jaxb.AbstractObject;
 import org.efaps.esjp.twoplan.jaxb.Calendar;
 import org.efaps.esjp.twoplan.jaxb.Entries;
 import org.efaps.esjp.twoplan.jaxb.Maps;
@@ -50,8 +51,8 @@ public class ProjectTest
             project.setName("TestName");
             project.setContext("manual");
             project.setUuid("_-R1qgN9eEeGFYMDgrVHNxA");
-            project.setStartDate(new DateTime().toDate());
-            project.setFinishDate(new DateTime().plusMonths(1).toDate());
+            project.setStartDate(new DateTime());
+            project.setFinishDate(new DateTime().plusMonths(1));
 
             final Calendar cal = new Calendar();
             cal.setContext("manual");
@@ -82,8 +83,8 @@ public class ProjectTest
             workPackage.setUuid("_C0H6MN9wEeGFYMDgrVHNxA");
             workPackage.setDescription("hier ist der Text");
             workPackage.setType("manual");
-            workPackage.setStartDate(new DateTime().toDate());
-            workPackage.setFinishDate(new DateTime().plusWeeks(1).toDate());
+            workPackage.setStartDate(new DateTime());
+            workPackage.setFinishDate(new DateTime().plusWeeks(1));
             project.getWorkPackages().add(workPackage);
 
             final WorkPackage workPackage2 = new WorkPackage();
@@ -92,12 +93,13 @@ public class ProjectTest
             workPackage2.setUuid("_C0H6MN9wE123YMDgrVHNxA");
             workPackage2.setDescription("hier ist der Text  nochmal");
             workPackage2.setType("manual");
-            workPackage2.setStartDate(new DateTime().plusDays(2).toDate());
-            workPackage2.setFinishDate(new DateTime().plusWeeks(2).toDate());
+            workPackage2.setStartDate(new DateTime().plusDays(2));
+            workPackage2.setFinishDate(new DateTime().plusWeeks(2));
             project.getWorkPackages().add(workPackage2);
 
 
-            final JAXBContext jc = JAXBContext.newInstance(Project.class, Maps.class, Entries.class);
+            final JAXBContext jc = JAXBContext.newInstance(AbstractObject.class, Calendar.class, Entries.class,
+                            Maps.class, Project.class, WorkPackage.class, DateTime.class);
             final Marshaller marshaller = jc.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
             marshaller.marshal(project, System.out);

@@ -92,6 +92,10 @@
             <sqltable>TwoPlan_FileSQLTable</sqltable>
             <sqlcolumn>MODIFIED</sqlcolumn>
         </attribute>
+        <trigger program="org.efaps.esjp.twoplan.File"
+            method="checkinPostTrigger"
+            name="TwoPlan_File.CHECKIN_POST"
+            event="CHECKIN_POST"/>
         <store name="TwoPlan_FileStore"/>
     </definition>
 </datamodel-type>

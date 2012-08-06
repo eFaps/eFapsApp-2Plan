@@ -21,17 +21,19 @@
 package org.efaps.esjp.twoplan.jaxb;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.efaps.admin.program.esjp.EFapsRevision;
 import org.efaps.admin.program.esjp.EFapsUUID;
+import org.joda.time.DateTime;
 
 /**
  * TODO comment!
@@ -68,18 +70,22 @@ public class WorkPackage
      * Start date of this workpackage.
      */
     @XmlAttribute(name="startDate")
-    private Date startDate;
+    @XmlSchemaType(name = "dateTime")
+    @XmlJavaTypeAdapter(DateTimeAdapter.class)
+    private DateTime startDate;
 
     /**
      * Finish date of this workpackage.
      */
     @XmlAttribute(name="finishDate")
-    private Date finishDate;
+    @XmlSchemaType(name = "dateTime")
+    @XmlJavaTypeAdapter(DateTimeAdapter.class)
+    private DateTime finishDate;
 
     /**
      * List of child workpackages for this workpackage.
      */
-    @XmlElement(name = "workPackages")
+    @XmlElement(name="workPackages")
     private final List<WorkPackage> children = new ArrayList<WorkPackage>();
 
     /**
@@ -97,7 +103,7 @@ public class WorkPackage
      *
      * @return value of instance variable {@link #startDate}
      */
-    public Date getStartDate()
+    public DateTime getStartDate()
     {
         return this.startDate;
     }
@@ -107,7 +113,7 @@ public class WorkPackage
      *
      * @param _startDate value for instance variable {@link #startDate}
      */
-    public void setStartDate(final Date _startDate)
+    public void setStartDate(final DateTime _startDate)
     {
         this.startDate = _startDate;
     }
@@ -117,7 +123,7 @@ public class WorkPackage
      *
      * @return value of instance variable {@link #finishDate}
      */
-    public Date getFinishDate()
+    public DateTime getFinishDate()
     {
         return this.finishDate;
     }
@@ -127,7 +133,7 @@ public class WorkPackage
      *
      * @param _finishDate value for instance variable {@link #finishDate}
      */
-    public void setFinishDate(final Date _finishDate)
+    public void setFinishDate(final DateTime _finishDate)
     {
         this.finishDate = _finishDate;
     }

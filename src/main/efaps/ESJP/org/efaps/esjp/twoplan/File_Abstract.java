@@ -21,8 +21,36 @@
 
 package org.efaps.esjp.twoplan;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Map;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+
+import org.efaps.admin.datamodel.Status;
+import org.efaps.admin.event.Parameter;
+import org.efaps.admin.event.Return;
 import org.efaps.admin.program.esjp.EFapsRevision;
 import org.efaps.admin.program.esjp.EFapsUUID;
+import org.efaps.db.Context;
+import org.efaps.db.Context.FileParameter;
+import org.efaps.db.Insert;
+import org.efaps.db.Instance;
+import org.efaps.db.InstanceQuery;
+import org.efaps.db.PrintQuery;
+import org.efaps.db.QueryBuilder;
+import org.efaps.db.Update;
+import org.efaps.esjp.ci.CIFormTwoPlan;
+import org.efaps.esjp.ci.CIProjects;
+import org.efaps.esjp.ci.CITwoPlan;
+import org.efaps.esjp.twoplan.jaxb.Calendar;
+import org.efaps.esjp.twoplan.jaxb.Entries;
+import org.efaps.esjp.twoplan.jaxb.Maps;
+import org.efaps.esjp.twoplan.jaxb.Project;
+import org.efaps.esjp.twoplan.jaxb.WorkPackage;
+import org.efaps.util.EFapsException;
 
 
 /**
@@ -35,5 +63,74 @@ import org.efaps.admin.program.esjp.EFapsUUID;
 @EFapsRevision("$Rev$")
 public abstract class File_Abstract
 {
+    public Return checkinPostTrigger(final Parameter _parameter)
+    {
+        try {
+            final Map<String, FileParameter> filePara = Context.getThreadContext().getFileParameters();
+            final FileParameter file = filePara.get(CIFormTwoPlan.TwoPlan_FileForm.upload.name);
+            final InputStream input = file.getInputStream();
 
+            final JAXBContext jc = JAXBContext.newInstance(Project.class, Maps.class, Entries.class, WorkPackage.class,
+                                                           Calendar.class);
+            final Unmarshaller unmarshaller = jc.createUnmarshaller();
+            final Object object = unmarshaller.unmarshal(input);
+
+            if (object instanceof Project) {
+                final Instance fileInst = _parameter.getInstance();
+
+                final PrintQuery print = new PrintQuery(fileInst);
+                print.addAttribute(CITwoPlan.File.ProjectLink);
+                print.execute();
+                final Long projectId = print.<Long>getAttribute(CITwoPlan.File.ProjectLink);
+
+                final Project project = (Project) object;
+                for (final WorkPackage wp : project.getWorkPackages()) {
+                    updateTask(_parameter, projectId, wp, null);
+                }
+            }
+        } catch (final EFapsException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (final JAXBException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (final IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return new Return();
+    }
+
+
+    protected void updateTask(final Parameter _parameter,
+                              final Long _projectId,
+                              final WorkPackage _wp,
+                              final Long _parentTaskId)
+        throws EFapsException
+    {
+        final QueryBuilder queryBldr = new QueryBuilder(CIProjects.TaskAbstract);
+        queryBldr.addWhereAttrEqValue(CITwoPlan.TaskAbstract.UUID, _wp.getUuid());
+        final InstanceQuery query = queryBldr.getQuery();
+        query.execute();
+        Update update;
+        if (query.next()) {
+            update = new Update(query.getCurrentValue());
+        } else {
+            update = new Insert(CIProjects.TaskScheduled);
+        }
+        update.add(CIProjects.TaskAbstract.DateFrom, _wp.getStartDate());
+        update.add(CIProjects.TaskAbstract.DateUntil, _wp.getFinishDate());
+        update.add(CIProjects.TaskAbstract.Name, _wp.getName());
+        update.add(CIProjects.TaskAbstract.Note, _wp.getDescription());
+        update.add(CIProjects.TaskAbstract.ProjectAbstractLink, _projectId);
+        update.add(CIProjects.TaskAbstract.StatusAbstract,
+                                                Status.find(CIProjects.TaskScheduledStatus.uuid, "Open").getId());
+        update.add(CIProjects.TaskAbstract.ParentTaskAbstractLink, _parentTaskId);
+        update.add(CITwoPlan.TaskAbstract.UUID, _wp.getUuid());
+        update.execute();
+
+        for (final WorkPackage wp : _wp.getChildren()) {
+            updateTask(_parameter, _projectId, wp, update.getInstance().getId());
+        }
+    }
 }
