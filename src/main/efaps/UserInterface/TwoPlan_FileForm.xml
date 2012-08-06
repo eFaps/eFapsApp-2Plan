@@ -53,7 +53,7 @@
         <field name="name">
             <property name="ModeCreate">EDITABLE</property>
             <property name="ModeView">NONE</property>
-            <property name="ModeEdit">NONE</property>
+            <property name="ModeEdit">EDITABLE</property>
             <property name="Attribute">Name</property>
             <property name="Label">TwoPlan_FileForm/Name.Label</property>
             <property name="Required">true</property>
