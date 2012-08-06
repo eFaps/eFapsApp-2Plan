@@ -34,12 +34,12 @@ import org.efaps.admin.program.esjp.EFapsUUID;
  * TODO comment!
  *
  * @author The eFaps Team
- * @version $Id: $
+ * @version $Id$
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "org.efaps.esjp.twoplan.jaxb.Entries")
 @EFapsUUID("d96fb02d-9c0a-468d-9cd5-9f5bab9173cf")
-@EFapsRevision("$Rev: 5526 $")
+@EFapsRevision("$Rev$")
 public class Entries
 {
     /**

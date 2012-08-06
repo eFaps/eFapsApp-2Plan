@@ -38,13 +38,13 @@ import org.efaps.admin.program.esjp.EFapsUUID;
  * TODO comment!
  *
  * @author The eFaps Team
- * @version $Id: $
+ * @version $Id$
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "Project")
 @XmlType(name = "org.efaps.esjp.twoplan.jaxb.Project")
 @EFapsUUID("5daed293-ec12-4559-b94e-896acfa37df1")
-@EFapsRevision("$Rev: 5526 $")
+@EFapsRevision("$Rev$")
 public class Project
     extends AbstractObject
 {

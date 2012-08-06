@@ -2,6 +2,6 @@
  * TODO comment!
  *
  * @author The eFaps Team
- * @version $Id: $
+ * @version $Id$
  */
 package org.efaps.twoplan.test;

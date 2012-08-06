@@ -35,12 +35,12 @@ import org.efaps.admin.program.esjp.EFapsUUID;
  * TODO comment!
  *
  * @author The eFaps Team
- * @version $Id: $
+ * @version $Id$
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "org.efaps.esjp.twoplan.jaxb.Maps")
 @EFapsUUID("e6e27fb7-2a9c-4071-b999-ebf93741c2e6")
-@EFapsRevision("$Rev: 5526 $")
+@EFapsRevision("$Rev$")
 public class Maps
 {
     /**

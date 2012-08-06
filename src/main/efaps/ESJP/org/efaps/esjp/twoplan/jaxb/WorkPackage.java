@@ -37,12 +37,12 @@ import org.efaps.admin.program.esjp.EFapsUUID;
  * TODO comment!
  *
  * @author The eFaps Team
- * @version $Id: $
+ * @version $Id$
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "org.efaps.esjp.twoplan.jaxb.WorkPackage")
 @EFapsUUID("0988666b-6b68-4efa-a009-99dc5c596662")
-@EFapsRevision("$Rev: 5526 $")
+@EFapsRevision("$Rev$")
 public class WorkPackage
     extends AbstractObject
 {

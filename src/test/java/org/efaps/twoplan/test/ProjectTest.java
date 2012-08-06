@@ -36,7 +36,7 @@ import org.testng.annotations.Test;
  * TODO comment!
  *
  * @author The eFaps Team
- * @version $Id: $
+ * @version $Id$
  */
 public class ProjectTest
 {

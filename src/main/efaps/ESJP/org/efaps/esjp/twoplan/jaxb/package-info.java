@@ -2,7 +2,7 @@
  * TODO comment!
  *
  * @author The eFaps Team
- * @version $Id: $
+ * @version $Id$
  */
 @javax.xml.bind.annotation.XmlSchema(
                 namespace = "http://www.2b-intime.com/model",

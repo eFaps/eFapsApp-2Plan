@@ -31,12 +31,12 @@ import org.efaps.admin.program.esjp.EFapsUUID;
  * TODO comment!
  *
  * @author The eFaps Team
- * @version $Id: $
+ * @version $Id$
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "org.efaps.esjp.twoplan.jaxb.Calendar")
 @EFapsUUID("0b093754-69f0-44d9-91d8-3ab47baabf6f")
-@EFapsRevision("$Rev: 5526 $")
+@EFapsRevision("$Rev$")
 public class Calendar
     extends AbstractObject
 {

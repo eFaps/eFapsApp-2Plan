@@ -33,11 +33,11 @@ import org.efaps.admin.program.esjp.EFapsUUID;
  * TODO comment!
  *
  * @author The eFaps Team
- * @version $Id: $
+ * @version $Id$
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @EFapsUUID("7960c579-be7b-4dd2-bad8-1570b7973ed2")
-@EFapsRevision("$Rev: 5526 $")
+@EFapsRevision("$Rev$")
 public class AbstractObject
 {
     /**
