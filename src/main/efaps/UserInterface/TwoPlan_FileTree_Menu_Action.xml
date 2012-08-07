@@ -31,6 +31,7 @@
         <!-- childs -->
         <childs>
             <child>TwoPlan_FileTree_Menu_Action_Edit</child>
+            <child>TwoPlan_FileTree_Menu_Action_Checkout</child>
         </childs>
     </definition>
 </ui-menu>

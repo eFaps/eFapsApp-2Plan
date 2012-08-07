@@ -147,7 +147,7 @@ public abstract class File_Base
         update.add(CIProjects.TaskAbstract.DateFrom, _wp.getStartDate());
         update.add(CIProjects.TaskAbstract.DateUntil, _wp.getFinishDate());
         update.add(CIProjects.TaskAbstract.Name, _wp.getName());
-        update.add(CIProjects.TaskAbstract.Note, _wp.getDescription());
+        update.add(CIProjects.TaskAbstract.Description, _wp.getDescription());
         update.add(CIProjects.TaskAbstract.ProjectAbstractLink, _projectId);
         update.add(CIProjects.TaskAbstract.StatusAbstract,
                         Status.find(CIProjects.TaskScheduledStatus.uuid, "Open").getId());
