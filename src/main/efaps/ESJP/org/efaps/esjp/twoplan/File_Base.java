@@ -20,17 +20,26 @@
 
 package org.efaps.esjp.twoplan;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.PropertyException;
 import javax.xml.bind.Unmarshaller;
 
 import org.efaps.admin.datamodel.Status;
 import org.efaps.admin.event.Parameter;
 import org.efaps.admin.event.Return;
+import org.efaps.admin.event.Return.ReturnValues;
 import org.efaps.admin.program.esjp.EFapsRevision;
 import org.efaps.admin.program.esjp.EFapsUUID;
 import org.efaps.db.Context;
@@ -38,18 +47,22 @@ import org.efaps.db.Context.FileParameter;
 import org.efaps.db.Insert;
 import org.efaps.db.Instance;
 import org.efaps.db.InstanceQuery;
+import org.efaps.db.MultiPrintQuery;
 import org.efaps.db.PrintQuery;
 import org.efaps.db.QueryBuilder;
 import org.efaps.db.Update;
 import org.efaps.esjp.ci.CIFormTwoPlan;
 import org.efaps.esjp.ci.CIProjects;
 import org.efaps.esjp.ci.CITwoPlan;
+import org.efaps.esjp.common.file.FileUtil;
+import org.efaps.esjp.twoplan.jaxb.AbstractObject;
 import org.efaps.esjp.twoplan.jaxb.Calendar;
 import org.efaps.esjp.twoplan.jaxb.Entries;
 import org.efaps.esjp.twoplan.jaxb.Maps;
 import org.efaps.esjp.twoplan.jaxb.Project;
 import org.efaps.esjp.twoplan.jaxb.WorkPackage;
 import org.efaps.util.EFapsException;
+import org.joda.time.DateTime;
 
 /**
  * TODO comment!
@@ -158,5 +171,111 @@ public abstract class File_Base
         for (final WorkPackage wp : _wp.getChildren()) {
             updateTask(_parameter, _projectId, wp, update.getInstance().getId());
         }
+    }
+
+    public Return getFile42plan(final Parameter _parameter)
+        throws EFapsException
+    {
+        final Return ret = new Return();
+        File file = null;
+        try {
+            final FileUtil fileUtil = new FileUtil();
+            file = fileUtil.getFile("2plan.prj");
+            final FileOutputStream out = new FileOutputStream(file);
+
+            final Instance projectInst = _parameter.getCallInstance();
+            final PrintQuery print = new PrintQuery(projectInst);
+            print.addAttribute(CIProjects.ProjectAbstract.Name, CIProjects.ProjectAbstract.Date,
+                            CIProjects.ProjectAbstract.DueDate);
+            print.execute();
+
+            final Project project = new Project();
+            project.setContext("manual");
+            project.setName(print.<String>getAttribute(CIProjects.ProjectAbstract.Name));
+            project.setStartDate(print.<DateTime>getAttribute(CIProjects.ProjectAbstract.Date));
+            project.setFinishDate(print.<DateTime>getAttribute(CIProjects.ProjectAbstract.DueDate));
+
+            final Calendar cal = new Calendar();
+            cal.setContext("manual");
+            cal.setUuid("__E2b0N9eEeGFYMDgrVHNxA");
+            project.setCalendar(cal);
+
+            final Maps map2 = new Maps();
+            map2.setType("manual");
+
+            final Entries entry2 = new Entries();
+            entry2.setKey("net.intime.product.mapentry.standardWorkPackageType");
+            entry2.setValue("2");
+            map2.getEntries().add(entry2);
+            project.getMaps().add(map2);
+
+            project.getWorkPackages().addAll(getWorkPackages(_parameter, projectInst, null));
+
+            final JAXBContext jc = JAXBContext.newInstance(AbstractObject.class, Calendar.class, Entries.class,
+                            Maps.class, Project.class, WorkPackage.class, DateTime.class);
+            final Marshaller marshaller = jc.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            marshaller.marshal(project, out);
+            out.close();
+        } catch (final FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (final PropertyException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (final JAXBException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (final IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        ret.put(ReturnValues.VALUES, file);
+        return ret;
+    }
+
+
+    protected List<WorkPackage> getWorkPackages(final Parameter _parameter,
+                                                final Instance _projectInst,
+                                                final Long _parentId)
+        throws EFapsException
+    {
+        final List<WorkPackage> ret = new ArrayList<WorkPackage>();
+        final QueryBuilder queryBldr = new QueryBuilder(CITwoPlan.TaskAbstract);
+        if (_parentId == null) {
+            queryBldr.addWhereAttrIsNull(CITwoPlan.TaskAbstract.ParentTaskAbstractLink);
+        } else {
+            queryBldr.addWhereAttrEqValue(CITwoPlan.TaskAbstract.ParentTaskAbstractLink, _parentId);
+        }
+        queryBldr.addWhereAttrEqValue(CITwoPlan.TaskAbstract.ProjectAbstractLink, _projectInst.getId());
+        final MultiPrintQuery multi = queryBldr.getPrint();
+        multi.addAttribute(CITwoPlan.TaskAbstract.Name, CITwoPlan.TaskAbstract.Description,
+                        CITwoPlan.TaskAbstract.DateFrom, CITwoPlan.TaskAbstract.DateUntil,
+                        CITwoPlan.TaskAbstract.UUID);
+        multi.execute();
+        while (multi.next()) {
+            final WorkPackage workPackage = new WorkPackage();
+            workPackage.setContext("manual");
+            workPackage.setType("manual");
+            workPackage.setName(multi.<String>getAttribute(CITwoPlan.TaskAbstract.Name));
+            workPackage.setDescription(multi.<String>getAttribute(CITwoPlan.TaskAbstract.Description));
+            workPackage.setStartDate(multi.<DateTime>getAttribute(CITwoPlan.TaskAbstract.DateFrom));
+            workPackage.setFinishDate(multi.<DateTime>getAttribute(CITwoPlan.TaskAbstract.DateUntil));
+
+            // get the uuid of the task, in case that it does not have one,
+            // create a new one
+            String uuid = multi.<String>getAttribute(CITwoPlan.TaskAbstract.UUID);
+            if (uuid == null) {
+                uuid = UUID.randomUUID().toString();
+                final Update update = new Update(multi.getCurrentInstance());
+                update.add(CITwoPlan.TaskAbstract.UUID, uuid);
+                update.execute();
+            }
+            workPackage.setUuid(uuid);
+            ret.add(workPackage);
+            workPackage.getChildren().addAll(
+                            getWorkPackages(_parameter, _projectInst, multi.getCurrentInstance().getId()));
+        }
+        return ret;
     }
 }

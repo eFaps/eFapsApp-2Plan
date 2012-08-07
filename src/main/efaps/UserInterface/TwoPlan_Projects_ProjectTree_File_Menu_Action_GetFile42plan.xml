@@ -19,19 +19,20 @@
  Last Changed:    $Date$
  Last Changed By: $Author$
 
---><ui-menu xmlns="http://www.efaps.org/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.efaps.org/xsd http://www.efaps.org/xsd/eFaps_1.0.xsd">
-
-    <uuid>5174e4e4-b1f9-409b-acbd-4441a61dc2a5</uuid>
+--><ui-command xmlns="http://www.efaps.org/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.efaps.org/xsd http://www.efaps.org/xsd/eFaps_1.0.xsd">
+    <uuid>a74f93a0-afad-4376-99ca-9a0d5ca91d0b</uuid>
     <file-application>eFapsApp-TwoPlan</file-application>
     <file-revision>$Rev$</file-revision>
-
     <definition>
         <version-expression>(version==latest)</version-expression>
-        <name>TwoPlan_Projects_ProjectTree_File_Menu_Action</name>
-        <childs>
-            <child>TwoPlan_Projects_ProjectTree_File_Menu_Action_CreateFile</child>
-            <child>TwoPlan_Projects_ProjectTree_File_Menu_Action_GetFile42plan</child>
-            <child>TwoPlan_Projects_ProjectTree_File_Menu_Action_Delete</child>
-        </childs>
+        <name>TwoPlan_Projects_ProjectTree_File_Menu_Action_GetFile42plan</name>
+        <!-- target definitions -->
+        <target>
+            <execute program="org.efaps.esjp.twoplan.File" method="getFile42plan"/>
+        </target>
+
+        <!-- properties -->
+        <property name="TargetMode">create</property>
+        <property name="TargetShowFile">true</property>
     </definition>
-</ui-menu>
+</ui-command>
