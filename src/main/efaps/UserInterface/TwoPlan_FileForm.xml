@@ -55,7 +55,7 @@
             <property name="ModeView">NONE</property>
             <property name="ModeEdit">EDITABLE</property>
             <property name="Attribute">Name</property>
-            <property name="Label">TwoPlan_FileForm/Name.Label</property>
+            <property name="Label">TwoPlan_File/Name.Label</property>
             <property name="Required">true</property>
         </field>
         <field character="Group" name="fileGroup">
@@ -70,11 +70,11 @@
         </field>
         <field name="fileName">
             <property name="Select">file.label</property>
-            <property name="Label">TwoPlan_FileForm.fileName.label</property>
+            <property name="Label">TwoPlan_FileForm.fileName.Label</property>
         </field>
         <field name="fileLength">
             <property name="Select">file.length</property>
-            <property name="Label">TwoPlan_FileForm.fileLength.label</property>
+            <property name="Label">TwoPlan_FileForm.fileLength.Label</property>
         </field>
         <field character="Group" name="createGroup">
             <property name="GroupCount">2</property>
