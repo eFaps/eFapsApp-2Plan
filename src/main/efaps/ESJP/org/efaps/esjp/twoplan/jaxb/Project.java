@@ -43,7 +43,7 @@ import org.joda.time.DateTime;
  * @version $Id$
  */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlRootElement(name = "Project")
+@XmlRootElement(name = "Project", namespace = "http://www.2b-intime.com/model")
 @XmlType(name = "org.efaps.esjp.twoplan.jaxb.Project")
 @EFapsUUID("5daed293-ec12-4559-b94e-896acfa37df1")
 @EFapsRevision("$Rev$")
