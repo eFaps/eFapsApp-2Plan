@@ -243,7 +243,6 @@ public abstract class File_Base
         return ret;
     }
 
-
     protected List<WorkPackage> getWorkPackages(final Parameter _parameter,
                                                 final Instance _projectInst,
                                                 final Long _parentId)
@@ -274,7 +273,7 @@ public abstract class File_Base
             // get the uuid of the task, in case that it does not have one,
             // create a new one
             String uuid = multi.<String>getAttribute(CITwoPlan.TaskAbstract.UUID);
-            if (uuid == null) {
+            if (uuid == null || uuid.isEmpty()) {
                 uuid = UUID.randomUUID().toString();
                 final Update update = new Update(multi.getCurrentInstance());
                 update.add(CITwoPlan.TaskAbstract.UUID, uuid);
