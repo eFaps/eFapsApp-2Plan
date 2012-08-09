@@ -32,7 +32,7 @@
         </target>
 
         <!-- properties -->
-        <property name="TargetMode">create</property>
+        <property name="Target">hidden</property>
         <property name="TargetShowFile">true</property>
     </definition>
 </ui-command>
