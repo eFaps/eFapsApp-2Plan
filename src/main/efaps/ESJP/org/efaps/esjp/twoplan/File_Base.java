@@ -197,8 +197,17 @@ public abstract class File_Base
 
             final Calendar cal = new Calendar();
             cal.setContext("manual");
-            cal.setUuid("__E2b0N9eEeGFYMDgrVHNxA");
+            cal.setUuid(UUID.randomUUID().toString());
             project.setCalendar(cal);
+
+            final Maps map1 = new Maps();
+            map1.setType("net.intime.crud.xml.map.path");
+
+            final Entries entry = new Entries();
+            entry.setKey("path");
+            entry.setValue(print.<String>getAttribute(CIProjects.ProjectAbstract.Name));
+            map1.getEntries().add(entry);
+            project.getMaps().add(map1);
 
             final Maps map2 = new Maps();
             map2.setType("manual");
