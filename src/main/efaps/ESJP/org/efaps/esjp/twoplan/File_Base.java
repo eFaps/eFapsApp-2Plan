@@ -191,6 +191,7 @@ public abstract class File_Base
 
             final Project project = new Project();
             project.setContext("manual");
+            project.setUuid(UUID.randomUUID().toString());
             project.setName(print.<String>getAttribute(CIProjects.ProjectAbstract.Name));
             project.setStartDate(print.<DateTime>getAttribute(CIProjects.ProjectAbstract.Date));
             project.setFinishDate(print.<DateTime>getAttribute(CIProjects.ProjectAbstract.DueDate));
