@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:model="http://www.2b-intime.com/model" name="Test" context="manual" startDate="2012-02-14T08:00:00.000-0500" finishDate="2012-11-30T08:00:29.399-0500">
+  <maps type="net.intime.crud.xml.map.path">
+    <entries key="path" value="GG-002C-12"/>
+  </maps>
+  <maps type="manual">
+    <entries key="net.intime.product.mapentry.standardWorkPackageType" value="2"/>
+  </maps>
+  <calendar context="manual" UUID="__E2b0N9eEeGFYMDgrVHNxA">
+    <exceptions name="entry" context="manual" UUID="_0Cxv4OJbEeGOpYnYZoe1vw" date="2012-08-23T08:00:55.875-0500"/>
+  </calendar>
+  <workPackages name="root" context="manual" UUID="_exicUOJaEeG8it4O0ixBdA" type="manual" startDate="2012-02-14T08:00:00.000-0500" finishDate="2012-09-05T08:00:00.000-0500">
+    <workPackages name="child 1" context="manual" UUID="_iWxdoOJaEeG8it4O0ixBdA" type="manual" startDate="2012-08-18T08:00:45.093-0500" finishDate="2012-08-23T08:00:41.260-0500">
+      <successors name="-" context="manual" UUID="_9KSG8OJbEeGOpYnYZoe1vw" successor="//@workPackages.0/@workPackages.2"/>
+    </workPackages>
+    <workPackages name="child 2" context="manual" UUID="_1Ivu4OJaEeG8it4O0ixBdA" type="manual" startDate="2012-08-16T14:45:54.205-0500" finishDate="2012-08-19T14:45:54.205-0500">
+      <successors name="-" context="manual" UUID="_8Z4kwOJbEeGOpYnYZoe1vw" successor="//@workPackages.0/@workPackages.2"/>
+    </workPackages>
+    <workPackages name="child3" context="manual" UUID="_mBC6geJbEeGOpYnYZoe1vw" type="manual" startDate="2012-08-27T14:43:24.000-0500" finishDate="2012-09-05T08:00:06.487-0500" predecessors="//@workPackages.0/@workPackages.1/@successors.0 //@workPackages.0/@workPackages.0/@successors.0"/>
+  </workPackages>
+  <milestones name="milestone" context="manual" UUID="_7oO3oOJWEeGktdqIi0fXaQ" date="2012-03-17T08:00:11.581-0500" external="true"/>
+</model:Project>

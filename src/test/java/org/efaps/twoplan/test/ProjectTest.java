@@ -20,11 +20,15 @@
 
 package org.efaps.twoplan.test;
 
+import java.io.File;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.PropertyException;
+import javax.xml.bind.Unmarshaller;
 
+import org.apache.commons.io.FileUtils;
 import org.efaps.esjp.twoplan.jaxb.AbstractObject;
 import org.efaps.esjp.twoplan.jaxb.Calendar;
 import org.efaps.esjp.twoplan.jaxb.Entries;
@@ -110,5 +114,28 @@ public class ProjectTest
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void unmarschall()
+    {
+        final File file = FileUtils.getFile("src","test", "resources", "2plan.prj");
+        try {
+            if (file.exists()) {
+                final JAXBContext jc = JAXBContext.newInstance(AbstractObject.class, Calendar.class, Entries.class,
+                                Maps.class, Project.class, WorkPackage.class, DateTime.class);
+                final Unmarshaller unmarshaller = jc.createUnmarshaller();
+                final Object object = unmarshaller.unmarshal(file);
+                if (object instanceof Project)
+                {
+
+                }
+            }
+        } catch (final JAXBException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+
     }
 }
