@@ -116,7 +116,14 @@
                 <groupId>org.efaps</groupId>
                 <artifactId>efaps-maven-plugin</artifactId>
                 <version>${maven.efaps.version}</version>
-
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate-ciclass</goal>
+                            <goal>generate-installation</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
                     <userName>Administrator</userName>
                     <passWord>Administrator</passWord>
