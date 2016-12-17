@@ -30,8 +30,8 @@
             <menu>TwoPlan_Projects_ProjectTree_File_Menu</menu>
             <table>TwoPlan_FileTable</table>
             <evaluate program="org.efaps.esjp.common.uitable.MultiPrint">
-                <property name="Types">TwoPlan_File</property>
-                <property name="LinkFroms">ProjectLink</property>
+                <property name="Type">TwoPlan_File</property>
+                <property name="LinkFrom">ProjectLink</property>
             </evaluate>
         </target>
         <!-- properties -->
